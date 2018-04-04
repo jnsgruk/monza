@@ -192,7 +192,7 @@ class Main extends Component {
             <Tab label="Other" />
           </Tabs>
           </AppBar>
-          <div>
+          <div style={{width: "100%", padding: 20, paddingTop: 0, border: "1px solid #eee"}}>
             { value === 0 && this.renderAPs(aps) }
             { value === 1 && this.renderClients(clients) }
             { value === 2 && this.renderBridged(bridged) }
@@ -210,13 +210,10 @@ class Main extends Component {
       <Grid container spacing={16} className={classes.main}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Paper className={classes.mainPaper}>
-            <Typography variant="headline"> Welcome to Monza</Typography>
-            <Divider style={{marginBottom: 10}}/>
-            <Dropzone onDrop={this.handleDrop} style={{padding: 5, backgroundColor: "#eee", position: "relative", border: "1px solid #ddd", height: 30, textAlign: "center", color: "#aaa", borderRadius: 10}}>
-              <Typography style={{color: "inherit"}}variant="body1">Drop files here or click to upload!</Typography>
+            <Dropzone onDrop={this.handleDrop} style={{marginBottom: 10, padding: 5, backgroundColor: "#eee", position: "relative", border: "1px solid #ddd", height: 50, textAlign: "center", color: "#aaa", borderRadius: 10}}>
+              <Typography style={{color: "inherit", paddingTop: 10}}variant="body1">Drop files here or click to upload!</Typography>
             </Dropzone>
             { this.renderTabs() }
-
           </Paper>
         </Grid>
       </Grid>
