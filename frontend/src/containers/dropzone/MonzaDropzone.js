@@ -4,6 +4,7 @@ import { withStyles } from "material-ui/styles"
 import Dropzone from "react-dropzone"
 
 import Typography from "material-ui/Typography"
+import Paper from "material-ui/Paper"
 
 const styles = theme => ({
   dropzone: {
@@ -21,6 +22,10 @@ const styles = theme => ({
   dropzoneText: {
     color: "inherit", 
     paddingTop: 10
+  },
+    dropPaper: {
+    padding: 20,
+    marginBottom: 10
   }
 })
 
@@ -44,9 +49,11 @@ class MonzaDropzone extends Component {
   render = () => {
     const { classes } = this.props
     return (
+      <Paper className={classes.dropPaper}>
       <Dropzone onDrop={this.handleDrop} className={classes.dropzone}>
         <Typography className={classes.dropzoneText} variant="body1">Drop files here or click to upload!</Typography>
       </Dropzone>
+      </Paper>
     )
   }
 }

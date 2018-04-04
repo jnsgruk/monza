@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 
 import Grid from "material-ui/Grid"
-import Paper from "material-ui/Paper"
 
 import TableTabs from "../components/tables/TableTabs"
 import MonzaDropzone from "./dropzone/MonzaDropzone"
@@ -14,10 +13,12 @@ const styles = theme => ({
     margin: "0 auto",
     marginTop: 70,
     width: "100%",
+    fontFamily: "Roboto !important"
   },
   mainPaper: {
     padding: 20
-  }
+  },
+
 })
 
 class Main extends Component {
@@ -26,10 +27,8 @@ class Main extends Component {
     return (
       <Grid container spacing={16} className={classes.main}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Paper className={classes.mainPaper}>
-            <MonzaDropzone />
-            <TableTabs datafile={datafile}/>
-          </Paper>
+          <MonzaDropzone />
+          <TableTabs datafile={datafile}/>
         </Grid>
       </Grid>
     )

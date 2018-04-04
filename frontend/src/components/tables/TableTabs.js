@@ -1,51 +1,63 @@
 import React, { Component } from "react"
+import { withStyles } from "material-ui/styles"
 
 import Tabs, { Tab } from "material-ui/Tabs"
 import AppBar from "material-ui/AppBar"
+import Paper from "material-ui/Paper"
 
-import ClientTable from "./ClientTable"
 import APTable from "./APTable"
-import OtherTable from "./OtherTable"
-import BridgedTable from "./BridgedTable"
+import GenericTable from "./GenericTable"
+import ProbeTable from "./ProbeTable"
+
+const styles = theme => ({
+  mainPaper: { padding: 20 },
+  tabBar: {
+    width: "calc(100% + 40px)",
+    marginTop: -20,
+    marginLeft: -20
+  }
+})
 
 class TableTabs extends Component {
 
-    state = { value: 0 }
+  state = { value: 0 }
 
-    handleChange = (event, value) => this.setState({ value })
-    
-    render = () => {
-        const { value } = this.state
-        const { datafile } = this.props
-        const { aps, clients, bridged, other, probes } = datafile
-        if (aps.length || clients.length || bridged.length || other.length || probes.length) {
-          return (
-            <div>
-              <AppBar position="static" color="default">
-              <Tabs
-                value={this.state.value}
-                onChange={this.handleChange}
-                indicatorColor="primary"
-                textColor="primary"
-                centered
-              >
-                <Tab label="APs" />
-                <Tab label="Clients" />
-                <Tab label="Bridged" />
-                <Tab label="Other" />
-              </Tabs>
-              </AppBar>
-              <div style={{width: "100%", padding: 20, paddingTop: 0}}>
-                { value === 0 && <APTable aps={aps}/> }
-                { value === 1 && <ClientTable clients={clients}/> }
-                { value === 2 && <BridgedTable bridged={bridged}/> }
-                { value === 3 && <OtherTable other={other}/> }
-              </div>
-            </div>
-          )
-        }
-        return null
+  handleChange = (event, value) => this.setState({ value })
+  
+  render = () => {
+    const { value } = this.state
+    const { classes, datafile } = this.props
+    const { aps, clients, bridged, other, probes } = datafile
+    if (Object.keys(datafile).length > 0) {
+      return (
+        <Paper className={classes.mainPaper}>
+          <AppBar position="static" color="default" className={classes.tabBar}>
+          <Tabs
+            value={this.state.value}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="APs" />
+            <Tab label="Clients" />
+            <Tab label="Bridged" />
+            <Tab label="Other" />
+            <Tab label="Probes" />
+          </Tabs>
+          </AppBar>
+          <div style={{width: "100%", padding: 20, paddingTop: 0}}>
+            { value === 0 && <APTable aps={aps}/> }
+            { value === 1 && <GenericTable rows={clients}/> }
+            { value === 2 && <GenericTable rows={bridged}/> }
+            { value === 3 && <GenericTable rows={other}/> }
+            { value === 4 && <ProbeTable rows={probes}/> }
+          </div>
+        </Paper>
+      )
     }
+    return null
+  }
 }
 
-export default TableTabs
+export default withStyles(styles)(TableTabs)

@@ -1,37 +1,40 @@
-import React from "react"
+import React, { Component } from "react"
 
-import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table"
+import DataTable from "./Datatable"
 
-const APTable = props => {
-  const {aps} = props
-	return (
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell style={{textAlign: "center"}}>SSID</TableCell>
-            <TableCell numeric style={{textAlign: "center"}}>MAC Address</TableCell>
-            <TableCell numeric style={{textAlign: "center"}}>Channel</TableCell>
-            <TableCell numeric style={{textAlign: "center"}}>Position</TableCell>
-            <TableCell numeric style={{textAlign: "center"}}>Last Seen</TableCell>
-            <TableCell numeric style={{textAlign: "center"}}>Clients</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {aps.map(n => {
-            return (
-              <TableRow key={n["Key"]}>
-                <TableCell style={{textAlign: "center"}}>{n["SSID"]}</TableCell>
-                <TableCell numeric style={{textAlign: "center"}}>{n["Device MAC"]}</TableCell>
-                <TableCell numeric style={{textAlign: "center"}}>{n["Channel"]}</TableCell>
-                <TableCell style={{textAlign: "center"}}>{n["Latitude"] + ", " + n["Longitude"]}</TableCell>
-                <TableCell style={{textAlign: "center"}}>{n["Last Seen"]}</TableCell>
-                <TableCell numeric style={{textAlign: "center"}}>{n["Clients"].length}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    )
+const columns = [
+  { name: "ssid", title: "SSID" },
+  { name: "mac", title: "MAC Address" },
+  { name: "channel", title: "Channel" },
+  { name: "clients", title: "Clients" },
+  { name: "lat", title: "Latitude" },
+  { name: "lon", title: "Longitude" },
+  { name: "lastseen", title: "Last Seen" }
+]
+
+class APTable extends Component {
+
+  generateRows = aps => {
+    let rows = []
+    for (let ap of aps) {
+      rows.push({ 
+        ssid: ap["SSID"], 
+        mac: ap["Device MAC"], 
+        channel: ap["Channel"], 
+        clients: ap["Clients"].length, 
+        lat: ap["Latitude"], 
+        lon: ap["Longitude"], 
+        lastseen: ap["Last Seen"]
+      })
+    }
+    return rows
+  }
+
+  render = () => {
+    const { aps } = this.props
+    const rows = this.generateRows(aps)
+    return <DataTable rows={rows} columns={columns}/>
+  }
 }
 
 export default APTable

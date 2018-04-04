@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@devexpress/dx-react-core": "^1.1.1",
+    "@devexpress/dx-react-grid": "^1.1.1",
+    "@devexpress/dx-react-grid-material-ui": "^1.1.1",
     "@rematch/core": "^0.5.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "classnames": "^2.2.5",

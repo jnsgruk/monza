@@ -1,11 +1,5 @@
 const datafile = {
-	state: {
-		aps: [],
-		clients: [],
-		bridged: [],
-		other: [],
-		probes: []
-	},
+	state: {},
 	
 	reducers: {
 		// Take a JSON object for config and update the state
