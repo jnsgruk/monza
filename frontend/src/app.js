@@ -7,7 +7,7 @@ import { withStyles } from "material-ui/styles"
 // CSS baseline basically does a CSS reset on the page
 import CssBaseline from "material-ui/CssBaseline"
 import Nav from "./containers/general/Nav"
-import Main from "./components/Main"
+import Main from "./containers/Main"
 
 const styles = theme => ({
   root: {
