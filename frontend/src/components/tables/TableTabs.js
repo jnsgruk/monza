@@ -9,6 +9,8 @@ import APTable from "./APTable"
 import GenericTable from "./GenericTable"
 import ProbeTable from "./ProbeTable"
 
+import APClientGraph from "../graphs/APClientGraph"
+
 const styles = theme => ({
   mainPaper: { padding: 20 },
   tabBar: {
@@ -44,6 +46,7 @@ class TableTabs extends Component {
             <Tab label="Bridged" />
             <Tab label="Other" />
             <Tab label="Probes" />
+            <Tab label="AP/Client Graph" />
           </Tabs>
           </AppBar>
           <div style={{width: "100%", padding: 20, paddingTop: 0}}>
@@ -52,6 +55,7 @@ class TableTabs extends Component {
             { value === 2 && <GenericTable rows={bridged}/> }
             { value === 3 && <GenericTable rows={other}/> }
             { value === 4 && <ProbeTable rows={probes}/> }
+            { value === 5 && <APClientGraph aps={aps} clients={clients} /> }
           </div>
         </Paper>
       )
