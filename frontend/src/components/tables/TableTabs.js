@@ -55,7 +55,7 @@ class TableTabs extends Component {
             { value === 2 && <GenericTable rows={bridged}/> }
             { value === 3 && <GenericTable rows={other}/> }
             { value === 4 && <ProbeTable rows={probes}/> }
-            { value === 5 && <APClientGraph aps={aps} clients={clients} /> }
+            { value === 5 && <APClientGraph aps={aps} clients={clients} bridged={bridged} other={other}/> }
           </div>
         </Paper>
       )
