@@ -13,7 +13,7 @@ const styles = theme => ({
     margin: "0 auto",
     marginTop: 70,
     width: "100%",
-    fontFamily: "Roboto !important"
+    fontFamily: "Roboto !important",
   },
   mainPaper: {
     padding: 20
