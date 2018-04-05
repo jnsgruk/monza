@@ -8,15 +8,7 @@ const columns = [
 
 class ProbeTable extends Component {
 
-  generateRows = rows => {
-    let output = []
-    for (let b of rows) {
-      output.push({ 
-        probe: b, 
-      })
-    }
-    return output
-  }
+  generateRows = rows => rows.map(b => ({probe: b}))
 
   render = () => {
     const { rows } = this.props

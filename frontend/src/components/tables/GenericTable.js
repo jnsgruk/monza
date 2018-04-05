@@ -14,18 +14,16 @@ const columns = [
 class GenericTable extends Component {
 
   generateRows = rows => {
-    let output = []
-    for (let b of rows) {
-      output.push({ 
+    return rows.map(b => {
+      return { 
         mac: b["Device MAC"], 
         lat: b["Latitude"], 
         lon: b["Longitude"], 
         probes: b["Probes"].length, 
         aps: b["APs"].length, 
         lastseen: b["Last Seen"]
-      })
-    }
-    return output
+      }
+    })
   }
 
   render = () => {

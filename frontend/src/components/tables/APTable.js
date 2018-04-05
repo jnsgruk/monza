@@ -15,9 +15,8 @@ const columns = [
 class APTable extends Component {
 
   generateRows = aps => {
-    let rows = []
-    for (let ap of aps) {
-      rows.push({ 
+    return aps.map(ap => {
+      return { 
         ssid: ap["SSID"], 
         mac: ap["Device MAC"], 
         channel: ap["Channel"], 
@@ -25,9 +24,8 @@ class APTable extends Component {
         lat: ap["Latitude"], 
         lon: ap["Longitude"], 
         lastseen: ap["Last Seen"]
-      })
-    }
-    return rows
+      }
+    })
   }
 
   render = () => {
