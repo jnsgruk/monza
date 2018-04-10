@@ -46,10 +46,10 @@ class APClientGraph extends Component {
   }
 
   formatData = (aggregate, nullLinks) => {
-    const { aps, clients, bridged, other } = this.props
+    const { aps, connected } = this.props
     let clientsSimple, apsSimple, links
 
-    let allClients = clients.concat(bridged).concat(other)
+    let allClients = connected
     let filteredAPs = !nullLinks ? aps.filter(ap => ap["Clients"].length > 0) : aps
     let filteredClients = !nullLinks ? allClients.filter(client => client["APs"].length > 0) : allClients
     
