@@ -1,6 +1,15 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
+
+import { withStyles } from "material-ui/styles"
+
 import DataTable from "./Datatable"
+
+const styles = theme => ({
+  link: {
+    color: "inherit"
+  }
+})
 
 const columns = [
   { name: "ssid", title: "SSID" },
@@ -15,10 +24,11 @@ const columns = [
 class APTable extends Component {
 
   generateRows = aps => {
+    const { classes } = this.props
     return aps.map(ap => {
       return { 
         ssid: ap["SSID"], 
-        mac: <Link to={`/ap/${ap["Device MAC"]}`}>{ap["Device MAC"]}</Link>, 
+        mac: <Link className={classes.link} to={`/ap/${ap["Device MAC"]}`}>{ap["Device MAC"]}</Link>, 
         channel: ap["Channel"], 
         clients: ap["Clients"].length, 
         lat: ap["Latitude"], 
@@ -35,4 +45,4 @@ class APTable extends Component {
   }
 }
 
-export default APTable
+export default withStyles(styles)(APTable)
