@@ -22,7 +22,7 @@ const styles = theme => ({
 
 class TableTabs extends Component {
 
-  state = { value: 5 }
+  state = { value: 0 }
 
   handleChange = (event, value) => this.setState({ value })
   

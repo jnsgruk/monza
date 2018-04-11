@@ -48,13 +48,16 @@ class MonzaDropzone extends Component {
     
   render = () => {
     const { classes } = this.props
-    return (
-      <Paper className={classes.dropPaper}>
-      <Dropzone onDrop={this.handleDrop} className={classes.dropzone}>
-        <Typography className={classes.dropzoneText} variant="body1">Drop files here or click to upload!</Typography>
-      </Dropzone>
-      </Paper>
-    )
+    if (Object.keys(this.props.datafile).length === 0) {
+      return (
+        <Paper className={classes.dropPaper}>
+        <Dropzone onDrop={this.handleDrop} className={classes.dropzone}>
+          <Typography className={classes.dropzoneText} variant="body1">Drop files here or click to upload!</Typography>
+        </Dropzone>
+        </Paper>
+      )
+    }
+    return null
   }
 }
 
