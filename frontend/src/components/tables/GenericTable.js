@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-
+import Typography from "material-ui/Typography"
 import DataTable from "./Datatable"
 
 const columns = [
@@ -27,9 +27,12 @@ class GenericTable extends Component {
   }
 
   render = () => {
-    const { rows } = this.props
+    const { rows, display } = this.props
     const tableRows = this.generateRows(rows)
-    return <DataTable rows={tableRows} columns={columns}/>
+    if (rows.length > 0) { 
+      return <DataTable display={ display ? display : 10} rows={tableRows} columns={columns}/>
+    }
+    return <Typography>No devices to show!</Typography>
   }
 }
 

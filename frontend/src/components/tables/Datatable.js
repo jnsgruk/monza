@@ -30,12 +30,14 @@ class DataTable extends Component {
   state = {
     sorting: [],
     currentPage: 0,
-    pageSize: 10,
-    pageSizes: [0, 10, 20, 30, 50, 100],
+    pageSize: null,
+    pageSizes: [0, 5, 10, 20, 30, 50, 100],
     filters: [],
     searchValue: "",
     grouping:  []
   }
+
+  componentWillMount = () => this.setState({ pageSize: this.props.display })
 
   changeSorting = sorting => this.setState({ sorting })
   changeGrouping = grouping => this.setState({ grouping })

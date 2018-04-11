@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 
+import { BrowserRouter as Router, Route } from "react-router-dom"
+
 // withStyles provides a method to apply the styles specified
 // It provides the component with a prop called "classes"
 import { withStyles } from "material-ui/styles"
@@ -8,6 +10,7 @@ import { withStyles } from "material-ui/styles"
 import CssBaseline from "material-ui/CssBaseline"
 import Nav from "./containers/general/Nav"
 import Main from "./containers/Main"
+import AP from "./containers/AP/AP"
 
 const styles = theme => ({
   root: {
@@ -22,7 +25,12 @@ class App extends Component {
         <CssBaseline />
         <Nav />
         <div className={classes.root}>
-          <Main />
+          <Router>
+            <div>
+              <Route exact path="/" component={ Main }/>
+              <Route name="ap" path="/ap/:mac" component={ AP } />
+            </div>
+          </Router>
         </div>
       </div>
     )

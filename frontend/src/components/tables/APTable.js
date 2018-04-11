@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-
+import { Link } from "react-router-dom"
 import DataTable from "./Datatable"
 
 const columns = [
@@ -18,7 +18,7 @@ class APTable extends Component {
     return aps.map(ap => {
       return { 
         ssid: ap["SSID"], 
-        mac: ap["Device MAC"], 
+        mac: <Link to={`/ap/${ap["Device MAC"]}`}>{ap["Device MAC"]}</Link>, 
         channel: ap["Channel"], 
         clients: ap["Clients"].length, 
         lat: ap["Latitude"], 
@@ -31,7 +31,7 @@ class APTable extends Component {
   render = () => {
     const { aps } = this.props
     const rows = this.generateRows(aps)
-    return <DataTable rows={rows} columns={columns}/>
+    return <DataTable display={10} rows={rows} columns={columns}/>
   }
 }
 

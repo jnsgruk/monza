@@ -23,7 +23,7 @@ const styles = theme => ({
     color: "inherit", 
     paddingTop: 10
   },
-    dropPaper: {
+  dropPaper: {
     padding: 20,
     marginBottom: 10
   }

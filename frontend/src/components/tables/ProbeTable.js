@@ -13,7 +13,7 @@ class ProbeTable extends Component {
   render = () => {
     const { rows } = this.props
     const tableRows = this.generateRows(rows)
-    return <DataTable rows={tableRows} columns={columns}/>
+    return <DataTable display={10} rows={tableRows} columns={columns}/>
   }
 }
 
