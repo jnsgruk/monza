@@ -11,11 +11,12 @@ import CssBaseline from "material-ui/CssBaseline"
 import Nav from "./containers/general/Nav"
 import Main from "./containers/Main"
 import AP from "./containers/AP/AP"
+import Client from "./containers/client/Client"
 
 const styles = theme => ({
   root: {
-    flex: 1
-  }
+    flex: 1,
+  },
 })
 class App extends Component {
   render = () => {
@@ -27,8 +28,9 @@ class App extends Component {
         <div className={classes.root}>
           <Router>
             <div>
-              <Route exact path="/" component={ Main }/>
-              <Route name="ap" path="/ap/:mac" component={ AP } />
+              <Route exact path="/" component={Main} />
+              <Route name="ap" path="/ap/:mac" component={AP} />
+              <Route name="client" path="/client/:mac" component={Client} />
             </div>
           </Router>
         </div>
