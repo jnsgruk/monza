@@ -1,15 +1,15 @@
 import React, { Component } from "react"
 import { withStyles } from "@material-ui/core/styles"
 
-import { Tabs, Tab } from "@material-ui/core"
+import { Tabs as MUITabs, Tab } from "@material-ui/core"
 import AppBar from "@material-ui/core/AppBar"
 import Paper from "@material-ui/core/Paper"
 
-import APTable from "./APTable"
-import GenericTable from "./GenericTable"
-import ProbeTable from "./ProbeTable"
+import GenericTable from "../../components/tables/generic-table"
+import APTable from "../../components/tables/ap-table"
+import ProbeTable from "../../components/tables/probe-table"
 
-import APClientGraph from "../graphs/APClientGraph"
+import APClientGraph from "./tabs/ap-client-graph"
 
 const styles = theme => ({
   mainPaper: { padding: 20 },
@@ -20,8 +20,8 @@ const styles = theme => ({
   },
 })
 
-class TableTabs extends Component {
-  state = { value: 3 }
+class Tabs extends Component {
+  state = { value: 0 }
 
   handleChange = (event, value) => this.setState({ value })
 
@@ -35,7 +35,7 @@ class TableTabs extends Component {
       return (
         <Paper className={classes.mainPaper}>
           <AppBar position="static" color="default" className={classes.tabBar}>
-            <Tabs
+            <MUITabs
               value={this.state.value}
               onChange={this.handleChange}
               indicatorColor="primary"
@@ -46,7 +46,7 @@ class TableTabs extends Component {
               <Tab label="Clients" />
               <Tab label="Probes" />
               <Tab label="AP/Client Graph" />
-            </Tabs>
+            </MUITabs>
           </AppBar>
           <div style={{ width: "100%", padding: 20, paddingTop: 0 }}>
             {value === 0 && <APTable aps={aps} />}
@@ -61,4 +61,4 @@ class TableTabs extends Component {
   }
 }
 
-export default withStyles(styles)(TableTabs)
+export default withStyles(styles)(Tabs)

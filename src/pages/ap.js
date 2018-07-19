@@ -9,9 +9,8 @@ import Divider from "@material-ui/core/Divider"
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import Icon from "@material-ui/core/Icon"
 
-import Map from "../../components/map/Map"
-import APTable from "../../components/tables/APTable"
-import ProbeTable from "../../components/tables/ProbeTable"
+import Map from "../components/map"
+import GenericTable from "../components/tables/generic-table"
 
 import { withStyles } from "@material-ui/core/styles"
 
@@ -30,27 +29,24 @@ const styles = theme => ({
   },
 })
 
-class Client extends Component {
+class AP extends Component {
   render = () => {
     const { classes, datafile, match } = this.props
     if (Object.keys(datafile).length > 0) {
       const { aps, clients, bridged, other } = datafile
-      const allClients = clients.concat(bridged).concat(other)
-      const matchedClients = allClients.filter(
-        c => c["Device MAC"] === match.params.mac
-      )
-      const client = matchedClients.length > 0 ? matchedClients[0] : null
-      if (client) {
-        const macs = client["APs"].map(c => c["Key"])
-        const clientAPs = aps.filter(c => macs.includes(c["Key"]))
+      const matchedAPs = aps.filter(ap => ap["Device MAC"] === match.params.mac)
+      const ap = matchedAPs.length > 0 ? matchedAPs[0] : null
+      if (ap) {
+        const macs = ap["Clients"].map(c => c["Key"])
+        const apclients = [...clients, ...bridged, ...other].filter(c =>
+          macs.includes(c["Key"])
+        )
         return (
           <Grid container spacing={16} className={classes.main}>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <Paper className={classes.mainPaper}>
-                <Typography variant="title">{client["SSID"]}</Typography>
-                <Typography variant="subheading">
-                  {client["Device MAC"]}
-                </Typography>
+                <Typography variant="title">{ap["SSID"]}</Typography>
+                <Typography variant="subheading">{ap["Device MAC"]}</Typography>
                 <Divider />
                 <Grid container spacing={16} className={classes.subMain}>
                   <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
@@ -60,7 +56,7 @@ class Client extends Component {
                           <Icon>class</Icon>
                         </ListItemIcon>
                         <ListItemText
-                          primary={`${client["Type"]}`}
+                          primary={`${ap["Type"]}`}
                           secondary={"Type"}
                         />
                       </ListItem>
@@ -69,9 +65,7 @@ class Client extends Component {
                           <Icon>gps_fixed</Icon>
                         </ListItemIcon>
                         <ListItemText
-                          primary={`${client["Latitude"]}, ${
-                            client["Longitude"]
-                          }`}
+                          primary={`${ap["Latitude"]}, ${ap["Longitude"]}`}
                           secondary={"Position"}
                         />
                       </ListItem>
@@ -80,7 +74,16 @@ class Client extends Component {
                           <Icon>wifi</Icon>
                         </ListItemIcon>
                         <ListItemText
-                          primary={`${client["Device MAC"]}`}
+                          primary={`${ap["SSID"]}`}
+                          secondary={"SSID"}
+                        />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon>
+                          <Icon>wifi</Icon>
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={`${ap["Device MAC"]}`}
                           secondary={"BSSID"}
                         />
                       </ListItem>
@@ -89,7 +92,7 @@ class Client extends Component {
                           <Icon>access_time</Icon>
                         </ListItemIcon>
                         <ListItemText
-                          primary={`${client["First Seen"]}`}
+                          primary={`${ap["First Seen"]}`}
                           secondary={"First Seen"}
                         />
                       </ListItem>
@@ -98,7 +101,7 @@ class Client extends Component {
                           <Icon>access_time</Icon>
                         </ListItemIcon>
                         <ListItemText
-                          primary={`${client["Last Seen"]}`}
+                          primary={`${ap["Last Seen"]}`}
                           secondary={"Last Seen"}
                         />
                       </ListItem>
@@ -117,23 +120,16 @@ class Client extends Component {
                           }}
                         />
                       }
-                      lat={client["Latitude"]}
-                      lon={client["Longitude"]}
+                      lat={ap["Latitude"]}
+                      lon={ap["Longitude"]}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Divider />
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Typography variant="title">APs</Typography>
-                    <APTable display={5} aps={clientAPs} />
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Typography variant="title">Probes</Typography>
-                    <ProbeTable
-                      display={5}
-                      rows={client["Probes"].map(p => p["SSID"])}
-                    />
+                    <Typography variant="title">Clients</Typography>
+                    <GenericTable display={5} rows={apclients} />
                   </Grid>
                 </Grid>
               </Paper>
@@ -161,5 +157,5 @@ export default withStyles(styles)(
   connect(
     mapState,
     mapDispatch
-  )(Client)
+  )(AP)
 )

@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"
 
 import { withStyles } from "@material-ui/core/styles"
 
-import DataTable from "./Datatable"
+import DataTable from "./datatable"
 
 const styles = theme => ({
   link: {
-    color: "inherit"
-  }
+    color: "inherit",
+  },
 })
 
 const columns = [
@@ -18,22 +18,25 @@ const columns = [
   { name: "clients", title: "Clients" },
   { name: "lat", title: "Latitude" },
   { name: "lon", title: "Longitude" },
-  { name: "lastseen", title: "Last Seen" }
+  { name: "lastseen", title: "Last Seen" },
 ]
 
 class APTable extends Component {
-
   generateRows = aps => {
     const { classes } = this.props
     return aps.map(ap => {
-      return { 
-        ssid: ap["SSID"], 
-        mac: <Link className={classes.link} to={`/ap/${ap["Device MAC"]}`}>{ap["Device MAC"]}</Link>, 
-        channel: ap["Channel"], 
-        clients: ap["Clients"].length, 
-        lat: ap["Latitude"], 
-        lon: ap["Longitude"], 
-        lastseen: ap["Last Seen"]
+      return {
+        ssid: ap["SSID"],
+        mac: (
+          <Link className={classes.link} to={`/ap/${ap["Device MAC"]}`}>
+            {ap["Device MAC"]}
+          </Link>
+        ),
+        channel: ap["Channel"],
+        clients: ap["Clients"].length,
+        lat: ap["Latitude"],
+        lon: ap["Longitude"],
+        lastseen: ap["Last Seen"],
       }
     })
   }
@@ -41,7 +44,7 @@ class APTable extends Component {
   render = () => {
     const { aps } = this.props
     const rows = this.generateRows(aps)
-    return <DataTable display={10} rows={rows} columns={columns}/>
+    return <DataTable display={10} rows={rows} columns={columns} />
   }
 }
 

@@ -8,32 +8,31 @@ import Paper from "@material-ui/core/Paper"
 
 const styles = theme => ({
   dropzone: {
-    marginBottom: 10, 
-    padding: 5, 
-    backgroundColor: "#eee", 
-    position: "relative", 
-    border: "1px solid #ddd", 
-    height: 50, 
-    textAlign: "center", 
-    color: "#aaa", 
-    borderRadius: 10
+    marginBottom: 10,
+    padding: 5,
+    backgroundColor: "#eee",
+    position: "relative",
+    border: "1px solid #ddd",
+    height: 50,
+    textAlign: "center",
+    color: "#aaa",
+    borderRadius: 10,
   },
 
   dropzoneText: {
-    color: "inherit", 
-    paddingTop: 10
+    color: "inherit",
+    paddingTop: 10,
   },
   dropPaper: {
     padding: 20,
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 })
 
 class MonzaDropzone extends Component {
-
   handleDrop = (acceptedFiles, rejectedFiles) => {
     const reader = new FileReader()
-    reader.addEventListener("loadend", event => { 
+    reader.addEventListener("loadend", event => {
       const json = JSON.parse(event.target.result)
       this.props.update(json)
     })
@@ -45,15 +44,17 @@ class MonzaDropzone extends Component {
       return true
     })
   }
-    
+
   render = () => {
     const { classes } = this.props
     if (Object.keys(this.props.datafile).length === 0) {
       return (
         <Paper className={classes.dropPaper}>
-        <Dropzone onDrop={this.handleDrop} className={classes.dropzone}>
-          <Typography className={classes.dropzoneText} variant="body1">Drop files here or click to upload!</Typography>
-        </Dropzone>
+          <Dropzone onDrop={this.handleDrop} className={classes.dropzone}>
+            <Typography className={classes.dropzoneText} variant="body1">
+              Drop files here or click to upload!
+            </Typography>
+          </Dropzone>
         </Paper>
       )
     }
@@ -66,8 +67,13 @@ const mapState = state => {
   return { datafile }
 }
 
-const mapDispatch = dispatch => ({ 
-    update: (payload) => dispatch.datafile.update(payload),
+const mapDispatch = dispatch => ({
+  update: payload => dispatch.datafile.update(payload),
 })
 
-export default withStyles(styles)(connect(mapState, mapDispatch)(MonzaDropzone))
+export default withStyles(styles)(
+  connect(
+    mapState,
+    mapDispatch
+  )(MonzaDropzone)
+)
