@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider, createMuiTheme } from "material-ui/styles"
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles"
 import PropTypes from 'prop-types';
 // This is a wrapper to enable theme switching between light/dark
 class Wrapper extends Component {

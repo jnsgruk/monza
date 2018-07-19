@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 
 // withStyles provides a method to apply the styles specified
 // It provides the component with a prop called "classes"
-import { withStyles } from "material-ui/styles"
+import { withStyles } from "@material-ui/core/styles"
 
 // CSS baseline basically does a CSS reset on the page
-import CssBaseline from "material-ui/CssBaseline"
+import CssBaseline from "@material-ui/core/CssBaseline"
 import Nav from "./containers/general/Nav"
 import Main from "./containers/Main"
 import AP from "./containers/AP/AP"

@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { withStyles } from "material-ui/styles"
+import { withStyles } from "@material-ui/core/styles"
 import Dropzone from "react-dropzone"
 
-import Typography from "material-ui/Typography"
-import Paper from "material-ui/Paper"
+import Typography from "@material-ui/core/Typography"
+import Paper from "@material-ui/core/Paper"
 
 const styles = theme => ({
   dropzone: {

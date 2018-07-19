@@ -1,12 +1,12 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-import Grid from "material-ui/Grid"
+import Grid from "@material-ui/core/Grid"
 
 import TableTabs from "../components/tables/TableTabs"
 import MonzaDropzone from "./dropzone/MonzaDropzone"
 
-import { withStyles } from "material-ui/styles"
+import { withStyles } from "@material-ui/core/styles"
 
 const styles = theme => ({
 	main: {
