@@ -2,18 +2,18 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 
-import Grid from "material-ui/Grid"
-import Paper from "material-ui/Paper"
-import Typography from "material-ui/Typography"
-import Divider from "material-ui/Divider"
-import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List"
-import Icon from "material-ui/Icon"
+import Grid from "@material-ui/core/Grid"
+import Paper from "@material-ui/core/Paper"
+import Typography from "@material-ui/core/Typography"
+import Divider from "@material-ui/core/Divider"
+import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
+import Icon from "@material-ui/core/Icon"
 
-import Map from "../../components/map/Map"
-import APTable from "../../components/tables/APTable"
-import ProbeTable from "../../components/tables/ProbeTable"
+import Map from "../components/map"
+import APTable from "../components/tables/ap-table"
+import ProbeTable from "../components/tables/probe-table"
 
-import { withStyles } from "material-ui/styles"
+import { withStyles } from "@material-ui/core/styles"
 
 const styles = theme => ({
   main: {
@@ -157,4 +157,9 @@ const mapDispatch = dispatch => ({
   update: payload => dispatch.datafile.update(payload),
 })
 
-export default withStyles(styles)(connect(mapState, mapDispatch)(Client))
+export default withStyles(styles)(
+  connect(
+    mapState,
+    mapDispatch
+  )(Client)
+)

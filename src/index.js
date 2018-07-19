@@ -7,8 +7,8 @@ import { Provider } from "react-redux"
 import { init } from "@rematch/core"
 import * as models from "./models/models"
 
-import App from "./app"
-import Wrapper from "./components/general/Wrapper"
+import Monza from "./pages/monza"
+import Wrapper from "./components/wrapper"
 
 // Initialize the redux store using Rematch/init
 const store = init({ models })
@@ -17,9 +17,9 @@ const store = init({ models })
 // Wrapper is a custom component that allows us to switch between light/dark theme
 ReactDOM.render(
   <Provider store={store}>
-   <Wrapper>
-     <App/>
-   </Wrapper>
+    <Wrapper>
+      <Monza />
+    </Wrapper>
   </Provider>,
   document.getElementById("root")
 )

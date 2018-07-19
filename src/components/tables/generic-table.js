@@ -1,8 +1,9 @@
 import React, { Component } from "react"
-import Typography from "material-ui/Typography"
-import DataTable from "./Datatable"
+import Typography from "@material-ui/core/Typography"
 import { Link } from "react-router-dom"
-import { withStyles } from "material-ui/styles"
+import { withStyles } from "@material-ui/core/styles"
+
+import DataTable from "./datatable"
 
 const styles = theme => ({
   link: {
