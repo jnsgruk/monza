@@ -95,17 +95,17 @@ class APClientGraph extends Component {
         name: `${c["SSID"]}\n(${c["Device MAC"]})`,
         color: "black",
       }))
-      links = Array.prototype.concat
-        .apply(
-          [],
-          filteredClients.map(c => {
-            return c["APs"].map(ap => {
-              let matched = filteredAPs.filter(a => a["Key"] === ap["Key"])
-              return matched[0] ? { source: c["Key"], target: ap["Key"] } : null
-            })
-          })
-        )
-        .filter(l => l !== null)
+
+      links = filteredClients.reduce((links, c) => {
+        const clientLinks = c["APs"].reduce((cLinks, ap) => {
+          let matched = filteredAPs.filter(a => a["Key"] === ap["Key"])
+          if (matched[0]) {
+            return [...cLinks, { source: c["Key"], target: ap["Key"] }]
+          }
+          return cLinks
+        }, [])
+        return [...links, ...clientLinks]
+      }, [])
     }
     this.setState(state => ({
       ...state,
