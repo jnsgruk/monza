@@ -75,28 +75,20 @@ class APClientGraph extends Component {
         color: "black",
       }))
 
-      links = []
-      // For every client
-      for (const c of filteredClients) {
-        // Loop over each of the client's known APs
-        for (const ap of c["APs"]) {
-          // Lookup the SSID of the AP
-          let ssid = filteredAPs.filter(a => ap["BSSID"] === a["Device MAC"])
-          if (ssid[0]) {
-            // Construct a new link for the graph
-            const newLink = { source: c["Key"], target: ssid[0]["SSID"] }
-            // Check if this link already exists (happens when a client connects to multiple APs with same SSID)
-            const existing = links.filter(
-              obj =>
-                obj.source === newLink.source && obj.target === newLink.target
-            )
-            // If no links with same source/target detected then add to array
-            if (!Object.keys(existing).length > 0) {
-              links.push(newLink)
-            }
+      links = filteredClients.reduce((links, c) => {
+        // For each of the APs associated with the client
+        const clientLinks = c["APs"].reduce((cLinks, ap) => {
+          // Lookup the SSID for the AP
+          const match = filteredAPs.filter(a => ap["BSSID"] === a["Device MAC"])
+          const ssid = match[0] ? match[0].SSID : null
+          // If an SSID was found, and a link hasn't already been made to that SSID
+          if (ssid && !cLinks.filter(l => l.target === ssid).length) {
+            return [...cLinks, { source: c["Key"], target: ssid }]
           }
-        }
-      }
+          return cLinks
+        }, [])
+        return [...links, ...clientLinks]
+      }, [])
     } else {
       apsSimple = filteredAPs.map(c => ({
         id: c["Key"],
