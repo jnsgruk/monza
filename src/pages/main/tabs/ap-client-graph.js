@@ -49,13 +49,12 @@ class APClientGraph extends Component {
     const { aps, connected } = this.props
     let clientsSimple, apsSimple, links
 
-    let allClients = connected
     let filteredAPs = !nullLinks
       ? aps.filter(ap => ap["Clients"].length > 0)
       : aps
     let filteredClients = !nullLinks
-      ? allClients.filter(client => client["APs"].length > 0)
-      : allClients
+      ? connected.filter(client => client["APs"].length > 0)
+      : connected
 
     clientsSimple = filteredClients.map(c => ({
       id: c["Key"],
