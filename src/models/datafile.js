@@ -1,16 +1,11 @@
 const datafile = {
-	state: {},
-	
-	reducers: {
-		// Take a JSON object for config and update the state
-		update(state, payload) {
-			const { aps, clients, bridged, other, probes } = payload
-			return { aps, clients, bridged, other, probes }
-		}
-	},
-	effects: {
-		
-	}
+  state: {},
+
+  reducers: {
+    update(state, payload) {
+      return { ...payload }
+    },
+  },
+  effects: {},
 }
 export default datafile
-

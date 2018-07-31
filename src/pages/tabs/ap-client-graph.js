@@ -3,15 +3,14 @@ import { withRouter } from "react-router-dom"
 import { withStyles } from "@material-ui/core/styles"
 
 import { Graph } from "react-d3-graph"
-import Checkbox from "@material-ui/core/Checkbox"
-import { FormGroup, FormControlLabel } from "@material-ui/core"
+import { FormGroup, FormControlLabel, Checkbox } from "@material-ui/core"
 
-const styles = theme => ({
+const styles = {
   graph: {
     width: "100%",
     height: "calc(100vh - 180px)",
   },
-})
+}
 
 class APClientGraph extends Component {
   state = {
@@ -109,7 +108,7 @@ class APClientGraph extends Component {
     this.setState(state => ({
       ...state,
       data: {
-        nodes: clientsSimple.concat(apsSimple),
+        nodes: [...clientsSimple, ...apsSimple],
         links,
       },
     }))

@@ -1,41 +1,50 @@
-import React, { Component } from "react"
+import React from "react"
 
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
-// withStyles provides a method to apply the styles specified
-// It provides the component with a prop called "classes"
 import { withStyles } from "@material-ui/core/styles"
+import { Grid, Paper, CssBaseline } from "@material-ui/core"
 
-import CssBaseline from "@material-ui/core/CssBaseline"
 import Nav from "./monza/nav"
-import Main from "./main"
+import Dropzone from "./dropzone"
+import Tabs from "./tabs"
 import AP from "./ap"
 import Client from "./client"
 
-const styles = theme => ({
-  root: {
-    flex: 1,
+const styles = {
+  main: {
+    margin: "0 auto",
+    marginTop: 70,
+    width: "100%",
+    fontFamily: "Roboto !important",
   },
-})
-class App extends Component {
-  render = () => {
-    const { classes } = this.props
-    return (
-      <div>
-        <CssBaseline />
-        <Nav />
-        <div className={classes.root}>
-          <Router>
-            <div>
-              <Route exact path="/" component={Main} />
-              <Route name="ap" path="/ap/:mac" component={AP} />
-              <Route name="client" path="/client/:mac" component={Client} />
-            </div>
-          </Router>
-        </div>
-      </div>
-    )
-  }
+  mainPaper: {
+    padding: 20,
+  },
 }
 
-export default withStyles(styles)(App)
+const Monza = ({ classes }) => (
+  <div>
+    <CssBaseline />
+    <Nav />
+    <div>
+      <Router>
+        <Grid container spacing={16} className={classes.main}>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Paper className={classes.mainPaper}>
+              <Route exact path="/" component={Dropzone} />
+              <Route exact path="/aps" component={Tabs} />
+              <Route exact path="/clients" component={Tabs} />
+              <Route exact path="/probes" component={Tabs} />
+              <Route exact path="/graph" component={Tabs} />
+              <Route name="ap" path="/ap/:mac" component={AP} />
+              <Route name="client" path="/client/:mac" component={Client} />
+            </Paper>
+          </Grid>
+        </Grid>
+      </Router>
+    </div>
+  </div>
+)
+
+export default withStyles(styles)(Monza)

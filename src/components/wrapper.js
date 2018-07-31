@@ -1,41 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component } from "react"
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles"
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types"
 // This is a wrapper to enable theme switching between light/dark
 class Wrapper extends Component {
-  
   static childContextTypes = {
-    changeTheme: PropTypes.func
+    changeTheme: PropTypes.func,
   }
 
   constructor(props) {
     super(props)
-    const theme = createMuiTheme({ palette: { type: "light" } })
-    this.state = { toggle: true, theme: theme }
+    this.state = {
+      toggle: true,
+      theme: createMuiTheme({ palette: { type: "light" } }),
+    }
   }
   // Update state and recompile theme to be light/dark respectively
   changeTheme = () => {
-    const theme = createMuiTheme(this.getNextTheme())
-    const toggle = !this.state.toggle
-    this.setState({ theme: theme, toggle: toggle })
+    this.setState({
+      theme: createMuiTheme(this.getNextTheme()),
+      toggle: !this.state.toggle,
+    })
   }
   // Work out which theme to switch to next
-  getNextTheme = () => {
-    const next = this.state.toggle ? "dark" : "light" 
-    return { palette: { type: next } }
-  }
+  getNextTheme = () => ({
+    palette: { type: this.state.toggle ? "dark" : "light" },
+  })
+
   // Provider for children to getContext
-  getChildContext = () => {
-    return { changeTheme: this.changeTheme }
-  }
+  getChildContext = () => ({ changeTheme: this.changeTheme })
+
   // Render a MUIThemeProvider with this component's children inside
-  render = () => {
-    return (
-      <MuiThemeProvider theme={this.state.theme}>
-        {this.props.children}
-      </MuiThemeProvider>
-    )
-  }
+  render = () => (
+    <MuiThemeProvider theme={this.state.theme}>
+      {this.props.children}
+    </MuiThemeProvider>
+  )
 }
 
 export default Wrapper
