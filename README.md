@@ -11,8 +11,8 @@ To get started:
 ```
 $ git clone https://github.com/jnsgruk/monza
 $ cd monza/
-$ npm install
-$ npm start
+$ yarn install
+$ yarn start
 ```
 
 You should now be able to browse to [http://localhost:3000](http://localhost:3000) and upload a JSON file outputted by [kismet-kml](https://github.com/jnsgruk/kismet-kml).
